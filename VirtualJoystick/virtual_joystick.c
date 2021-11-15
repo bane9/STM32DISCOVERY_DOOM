@@ -30,6 +30,34 @@ static events event_buffer[VJ_KEY_COUNT];
 
 const constraint constraints[] = {
 
+		[VJ_SCREEN_TOP_LEFT] = {
+			.left   = 0,
+			.top    = 0,
+			.right  = 50,
+			.bottom = 65,
+		},
+
+		[VJ_SCREEN_TOP_RIGHT] = {
+			.left   = 270,
+			.top    = 0,
+			.right  = 320,
+			.bottom = 65,
+		},
+
+		[VJ_SCREEN_BOTTOM_LEFT] = {
+			.left   = 0,
+			.top    = 170,
+			.right  = 50,
+			.bottom = 240,
+		},
+
+		[VJ_SCREEN_BOTOM_RIGHT] = {
+			.left   = 265,
+			.top    = 170,
+			.right  = 320,
+			.bottom = 240,
+		},
+
 		[VJ_SCREEN_LEFT] = {
 			.top    = 45,
 			.bottom = 195,
@@ -117,7 +145,7 @@ static void check_ts(void)
 	for(int i = 0; i < sizeof(constraints) / sizeof(constraints[0]); i++)
 	{
 
-		if(i >= VJ_SCREEN_UP
+		if(i >= VJ_SCREEN_TOP_LEFT
 				&& i <= VJ_SCREEN_CENTER
 				&& !event_buffer[i].needs_to_be_sent
 				&& does_fit_constraint(ts.X, ts.Y, &constraints[i]))

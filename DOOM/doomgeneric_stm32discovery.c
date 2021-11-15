@@ -34,6 +34,26 @@ int DG_GetKey(int* pressed, unsigned char* key)
 
 	switch(evt.key)
 	{
+	case VJ_SCREEN_TOP_LEFT:
+	{
+		*key = KEY_ESCAPE;
+		break;
+	}
+	case VJ_SCREEN_TOP_RIGHT:
+	{
+		*key = KEY_TAB;
+		break;
+	}
+	case VJ_SCREEN_BOTTOM_LEFT:
+	{
+		*key = KEYP_MINUS;
+		break;
+	}
+	case VJ_SCREEN_BOTOM_RIGHT:
+	{
+		*key = KEYP_PLUS;
+		break;
+	}
 	case VJ_PUSH_BUTTON:
 	{
 		if(menuactive)
@@ -59,27 +79,13 @@ int DG_GetKey(int* pressed, unsigned char* key)
 	}
 	case VJ_SCREEN_LEFT:
 	{
-		if(menuactive)
-		{
-			*key = KEY_ESCAPE;
-		}
-		else
-		{
-			*key = KEY_LEFTARROW;
-		}
+		*key = KEY_LEFTARROW;
 
 		break;
 	}
 	case VJ_SCREEN_RIGHT:
 	{
-		if(menuactive)
-		{
-			*key = 'y';
-		}
-		else
-		{
-			*key = KEY_RIGHTARROW;
-		}
+		*key = KEY_RIGHTARROW;
 		break;
 	}
 	case VJ_SCREEN_CENTER:

@@ -12,7 +12,7 @@ A [doomgeneric](https://github.com/ozkl/doomgeneric) port capable of running all
 
 Game controls use both the on display touch sensor and the user button (the blue button on the board).
 
-Control schemes change depending on if you are currently in the game or if the menu is popped up. This is the control mapping for the touch screen:
+This is the control mapping for the touch screen:
 
 ![](images/touch_controls.png)
 

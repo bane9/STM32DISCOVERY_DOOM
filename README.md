@@ -18,7 +18,7 @@ This is the control mapping for the touch screen:
 
 The user button is mapping:
 - While in a menu, it sends "Key enter"
-- While in a game, it sends "Key use"
+- While in a game, it sends "Key fire"
 
 # Flashing
 

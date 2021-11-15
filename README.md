@@ -18,7 +18,7 @@ Control schemes change depending on if you are currently in the game or if the m
 
 The user button is mapping:
 - While in a menu, it sends "Key enter"
-- While in a game, it sends "Key use"
+- While in a game, it sends "Key fire"
 
 # Flashing
 

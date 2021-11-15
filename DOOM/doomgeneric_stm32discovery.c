@@ -32,11 +32,6 @@ int DG_GetKey(int* pressed, unsigned char* key)
 
 	evt = virtual_joystick_get_event();
 
-	if(evt.key == VJ_KEY_NONE)
-	{
-		return 0;
-	}
-
 	switch(evt.key)
 	{
 	case VJ_PUSH_BUTTON:
@@ -64,13 +59,27 @@ int DG_GetKey(int* pressed, unsigned char* key)
 	}
 	case VJ_SCREEN_LEFT:
 	{
-		*key = KEY_LEFTARROW;
+		if(menuactive)
+		{
+			*key = KEY_ESCAPE;
+		}
+		else
+		{
+			*key = KEY_LEFTARROW;
+		}
 
 		break;
 	}
 	case VJ_SCREEN_RIGHT:
 	{
-		*key = KEY_RIGHTARROW;
+		if(menuactive)
+		{
+			*key = 'y';
+		}
+		else
+		{
+			*key = KEY_RIGHTARROW;
+		}
 		break;
 	}
 	case VJ_SCREEN_CENTER:

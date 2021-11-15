@@ -2042,11 +2042,11 @@ float M_GetFloatVariable(char *name)
 
 static char *GetDefaultConfigDir(void)
 {
-    char *result = (char *)malloc(2);
-    result[0] = '.';
-    result[1] = '\0';
+//    char *result = (char *)malloc(2);
+//    result[0] = '.';
+//    result[1] = '\0';
 
-    return result;
+    return "config";
 }
 
 // 
@@ -2115,7 +2115,7 @@ char *M_GetSaveGameDir(char *iwadname)
 
         free(topdir);
 #else
-        savegamedir = M_StringJoin(configdir, DIR_SEPARATOR_S, ".savegame/", NULL);
+        savegamedir = M_StringJoin(configdir, DIR_SEPARATOR_S, ".savegame", NULL);
 
         M_MakeDirectory(savegamedir);
 

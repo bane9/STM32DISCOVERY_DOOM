@@ -152,7 +152,7 @@ int main(void)
 
   extern void doom_main(int argc, char* argv[]);
 
-  char* argv[] = {"doom", "-iwad", "tnt.wad", NULL};
+  char* argv[] = {"doom", "-iwad", "doom.wad", NULL};
   int argc = sizeof(argv) / sizeof(argv[0]) - 1;
 
   doom_main(argc, argv);

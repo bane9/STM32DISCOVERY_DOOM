@@ -54,3 +54,4 @@ dkms.conf
 Debug/
 Release/
 
+STM32DISCOVERY_DOOM.launch

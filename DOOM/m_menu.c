@@ -40,7 +40,6 @@
 
 #include "r_local.h"
 
-
 #include "hu_stuff.h"
 
 #include "g_game.h"
@@ -502,7 +501,9 @@ menu_t  SaveDef =
 //
 void M_ReadSaveStrings(void)
 {
-    FILE   *handle;
+    FIL     handle;
+    FRESULT result;
+    UINT read_bytes;
     int     i;
     char    name[256];
 
@@ -510,15 +511,15 @@ void M_ReadSaveStrings(void)
     {
         M_StringCopy(name, P_SaveGameFile(i), sizeof(name));
 
-	handle = fopen(name, "rb");
-        if (handle == NULL)
+        result = f_open(&handle, name, FA_READ);
+        if (result != FR_OK)
         {
             M_StringCopy(savegamestrings[i], EMPTYSTRING, SAVESTRINGSIZE);
             LoadMenu[i].status = 0;
             continue;
         }
-	fread(&savegamestrings[i], 1, SAVESTRINGSIZE, handle);
-	fclose(handle);
+	f_read(&handle, &savegamestrings[i], SAVESTRINGSIZE, &read_bytes);
+	f_close(&handle);
 	LoadMenu[i].status = 1;
     }
 }
@@ -667,7 +668,7 @@ void M_SaveGame (int choice)
 //
 //      M_QuickSave
 //
-char    tempstring[80];
+char    tempstring[100];
 
 void M_QuickSaveResponse(int key)
 {
@@ -729,7 +730,7 @@ void M_QuickLoad(void)
 	M_StartMessage(DEH_String(QSAVESPOT),NULL,false);
 	return;
     }
-    DEH_snprintf(tempstring, 80, QLPROMPT, savegamestrings[quickSaveSlot]);
+    DEH_snprintf(tempstring, 100, QLPROMPT, savegamestrings[quickSaveSlot]);
     M_StartMessage(tempstring,M_QuickLoadResponse,true);
 }
 

@@ -35,6 +35,8 @@
 
 #include "z_zone.h"
 
+#include "../umm_malloc/umm_malloc.h"
+
 //
 // DEFAULTS
 //
@@ -2042,11 +2044,7 @@ float M_GetFloatVariable(char *name)
 
 static char *GetDefaultConfigDir(void)
 {
-//    char *result = (char *)malloc(2);
-//    result[0] = '.';
-//    result[1] = '\0';
-
-    return "config";
+    return "doom_config";
 }
 
 // 
@@ -2086,43 +2084,20 @@ void M_SetConfigDir(char *dir)
 
 char *M_GetSaveGameDir(char *iwadname)
 {
-    char *savegamedir;
-#if ORIGCODE
-    char *topdir;
-#endif
+    char* savegame_dir = umm_calloc(100, 1);
 
-    // If not "doing" a configuration directory (Windows), don't "do"
-    // a savegame directory, either.
+    strcat(savegame_dir, configdir);
+    strcat(savegame_dir, DIR_SEPARATOR_S);
+    strcat(savegame_dir, "savegame");
 
-    if (!strcmp(configdir, ""))
-    {
-    	savegamedir = strdup("");
-    }
-    else
-    {
-#if ORIGCODE
-        // ~/.chocolate-doom/savegames
+	M_MakeDirectory(savegame_dir);
 
-        topdir = M_StringJoin(configdir, "savegame", NULL);
-        M_MakeDirectory(topdir);
+	strcat(savegame_dir, DIR_SEPARATOR_S);
+	strcat(savegame_dir, iwadname);
 
-        // eg. ~/.chocolate-doom/savegames/doom2.wad/
+	M_MakeDirectory(savegame_dir);
 
-        savegamedir = M_StringJoin(topdir, DIR_SEPARATOR_S, iwadname,
-                                   DIR_SEPARATOR_S, NULL);
+	strcat(savegame_dir, DIR_SEPARATOR_S);
 
-        M_MakeDirectory(savegamedir);
-
-        free(topdir);
-#else
-        savegamedir = M_StringJoin(configdir, DIR_SEPARATOR_S, ".savegame", NULL);
-
-        M_MakeDirectory(savegamedir);
-
-        printf ("Using %s for savegames\n", savegamedir);
-#endif
-    }
-
-    return savegamedir;
+    return savegame_dir;
 }
-

@@ -1554,14 +1554,14 @@ typedef void (*load_callback_t)(char *lumpname, patch_t **variable);
 static void WI_loadUnloadData(load_callback_t callback)
 {
     int i, j;
-    char name[9];
+    char name[20];
     anim_t *a;
 
     if (gamemode == commercial)
     {
 	for (i=0 ; i<NUMCMAPS ; i++)
 	{
-	    DEH_snprintf(name, 9, "CWILV%2.2d", i);
+	    DEH_snprintf(name, 20, "CWILV%2.2d", i);
             callback(name, &lnames[i]);
 	}
     }
@@ -1593,8 +1593,8 @@ static void WI_loadUnloadData(load_callback_t callback)
 		    if (wbs->epsd != 1 || j != 8)
 		    {
 			// animations
-			DEH_snprintf(name, 9, "WIA%d%.2d%.2d", wbs->epsd, j, i);
-                        callback(name, &a->p[i]);
+			DEH_snprintf(name, 20, "WIA%d%.2d%.2d", wbs->epsd, j, i);
+            callback(name, &a->p[i]);
 		    }
 		    else
 		    {

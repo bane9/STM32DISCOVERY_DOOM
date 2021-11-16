@@ -88,18 +88,18 @@ fixed_t*			cachedystep;
 
 void R_PlaneInit(void)
 {
-	visplanes = calloc(MAXVISPLANES, sizeof(visplane_t));
+	visplanes = umm_calloc(MAXVISPLANES, sizeof(visplane_t));
 	openings = umm_calloc(MAXOPENINGS, sizeof(short));
-	floorclip = calloc(SCREENWIDTH, sizeof(short));
-	ceilingclip = calloc(SCREENWIDTH, sizeof(short));
-	spanstart = calloc(SCREENHEIGHT, sizeof(int));
-	spanstop = calloc(SCREENHEIGHT, sizeof(int));
-	yslope = calloc(SCREENHEIGHT, sizeof(fixed_t));
-	distscale = calloc(SCREENWIDTH, sizeof(fixed_t));
-	cachedheight = calloc(SCREENHEIGHT, sizeof(fixed_t));
-	cacheddistance = calloc(SCREENHEIGHT, sizeof(fixed_t));
-	cachedxstep = calloc(SCREENHEIGHT, sizeof(fixed_t));
-	cachedystep = calloc(SCREENHEIGHT, sizeof(fixed_t));
+	floorclip = umm_calloc(SCREENWIDTH, sizeof(short));
+	ceilingclip = umm_calloc(SCREENWIDTH, sizeof(short));
+	spanstart = umm_calloc(SCREENHEIGHT, sizeof(int));
+	spanstop = umm_calloc(SCREENHEIGHT, sizeof(int));
+	yslope = umm_calloc(SCREENHEIGHT, sizeof(fixed_t));
+	distscale = umm_calloc(SCREENWIDTH, sizeof(fixed_t));
+	cachedheight = umm_calloc(SCREENHEIGHT, sizeof(fixed_t));
+	cacheddistance = umm_calloc(SCREENHEIGHT, sizeof(fixed_t));
+	cachedxstep = umm_calloc(SCREENHEIGHT, sizeof(fixed_t));
+	cachedystep = umm_calloc(SCREENHEIGHT, sizeof(fixed_t));
 }
 
 //

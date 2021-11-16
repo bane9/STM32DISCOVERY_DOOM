@@ -246,7 +246,7 @@ void D_CheckNetGame (void)
         autostart = true;
     }
 
-    D_RegisterLoopCallbacks(&doom_loop_interface);
+    D_RegisterLoopCallbacks((loop_interface_t *)&doom_loop_interface);
 
     SaveGameSettings(&settings);
     D_StartNetGame(&settings, NULL);

@@ -21,6 +21,8 @@
 #define __P_SAVEG__
 
 #include <stdio.h>
+#include "fatfs.h"
+
 
 // maximum size of a savegame description
 
@@ -55,7 +57,7 @@ void P_UnArchiveThinkers (void);
 void P_ArchiveSpecials (void);
 void P_UnArchiveSpecials (void);
 
-extern FILE *save_stream;
+extern FIL save_stream;
 extern boolean savegame_error;
 
 

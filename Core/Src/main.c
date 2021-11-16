@@ -142,13 +142,16 @@ int main(void)
 	  *ptr = 0;
   }
 
-  umm_init_heap((void*) 0xD0030000, 0x71000 - 1);
+  umm_init_heap((void*) 0xD0030000, 0x75000 - 1);
 
   display_init();
 
   filesystem_init();
 
   BSP_LED_Off(LED4);
+
+  atexit(HAL_NVIC_SystemReset);
+  at_quick_exit(HAL_NVIC_SystemReset);
 
   extern void doom_main(int argc, char* argv[]);
 

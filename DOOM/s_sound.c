@@ -78,7 +78,7 @@ typedef struct
 
 // The set of channels available
 
-static channel_t *channels;
+//static channel_t *channels;
 
 // Maximum volume of a sound effect.
 // Internal default is max out of 0-15.
@@ -91,15 +91,15 @@ int musicVolume = 8;
 
 // Internal volume level, ranging from 0-127
 
-static int snd_SfxVolume;
+//static int snd_SfxVolume;
 
 // Whether songs are mus_paused
 
-static boolean mus_paused;        
+//static boolean mus_paused;
 
 // Music currently being played
 
-static musicinfo_t *mus_playing = NULL;
+//static musicinfo_t *mus_playing = NULL;
 
 // Number of channels to use
 
@@ -149,38 +149,38 @@ void S_Shutdown(void)
 //    I_ShutdownMusic();
 }
 
-static void S_StopChannel(int cnum)
-{
-//    int i;
-//    channel_t *c;
-//
-//    c = &channels[cnum];
-//
-//    if (c->sfxinfo)
-//    {
-//        // stop the sound playing
-//
-//        if (I_SoundIsPlaying(c->handle))
-//        {
-//            I_StopSound(c->handle);
-//        }
-//
-//        // check to see if other channels are playing the sound
-//
-//        for (i=0; i<snd_channels; i++)
-//        {
-//            if (cnum != i && c->sfxinfo == channels[i].sfxinfo)
-//            {
-//                break;
-//            }
-//        }
-//
-//        // degrade usefulness of sound data
-//
-//        c->sfxinfo->usefulness--;
-//        c->sfxinfo = NULL;
-//    }
-}
+//static void S_StopChannel(int cnum)
+//{
+////    int i;
+////    channel_t *c;
+////
+////    c = &channels[cnum];
+////
+////    if (c->sfxinfo)
+////    {
+////        // stop the sound playing
+////
+////        if (I_SoundIsPlaying(c->handle))
+////        {
+////            I_StopSound(c->handle);
+////        }
+////
+////        // check to see if other channels are playing the sound
+////
+////        for (i=0; i<snd_channels; i++)
+////        {
+////            if (cnum != i && c->sfxinfo == channels[i].sfxinfo)
+////            {
+////                break;
+////            }
+////        }
+////
+////        // degrade usefulness of sound data
+////
+////        c->sfxinfo->usefulness--;
+////        c->sfxinfo = NULL;
+////    }
+//}
 
 //
 // Per level startup code.
@@ -259,60 +259,60 @@ void S_StopSound(mobj_t *origin)
 //   If none available, return -1.  Otherwise channel #.
 //
 
-static int S_GetChannel(mobj_t *origin, sfxinfo_t *sfxinfo)
-{
-//    // channel number to use
-//    int                cnum;
-//
-//    channel_t*        c;
-//
-//    // Find an open channel
-//    for (cnum=0 ; cnum<snd_channels ; cnum++)
-//    {
-//        if (!channels[cnum].sfxinfo)
-//        {
-//            break;
-//        }
-//        else if (origin && channels[cnum].origin == origin)
-//        {
-//            S_StopChannel(cnum);
-//            break;
-//        }
-//    }
-//
-//    // None available
-//    if (cnum == snd_channels)
-//    {
-//        // Look for lower priority
-//        for (cnum=0 ; cnum<snd_channels ; cnum++)
-//        {
-//            if (channels[cnum].sfxinfo->priority >= sfxinfo->priority)
-//            {
-//                break;
-//            }
-//        }
-//
-//        if (cnum == snd_channels)
-//        {
-//            // FUCK!  No lower priority.  Sorry, Charlie.
-//            return -1;
-//        }
-//        else
-//        {
-//            // Otherwise, kick out lower priority.
-//            S_StopChannel(cnum);
-//        }
-//    }
-//
-//    c = &channels[cnum];
-//
-//    // channel is decided to be cnum.
-//    c->sfxinfo = sfxinfo;
-//    c->origin = origin;
-//
-//    return cnum;
-	return -1;
-}
+//static int S_GetChannel(mobj_t *origin, sfxinfo_t *sfxinfo)
+//{
+////    // channel number to use
+////    int                cnum;
+////
+////    channel_t*        c;
+////
+////    // Find an open channel
+////    for (cnum=0 ; cnum<snd_channels ; cnum++)
+////    {
+////        if (!channels[cnum].sfxinfo)
+////        {
+////            break;
+////        }
+////        else if (origin && channels[cnum].origin == origin)
+////        {
+////            S_StopChannel(cnum);
+////            break;
+////        }
+////    }
+////
+////    // None available
+////    if (cnum == snd_channels)
+////    {
+////        // Look for lower priority
+////        for (cnum=0 ; cnum<snd_channels ; cnum++)
+////        {
+////            if (channels[cnum].sfxinfo->priority >= sfxinfo->priority)
+////            {
+////                break;
+////            }
+////        }
+////
+////        if (cnum == snd_channels)
+////        {
+////            // FUCK!  No lower priority.  Sorry, Charlie.
+////            return -1;
+////        }
+////        else
+////        {
+////            // Otherwise, kick out lower priority.
+////            S_StopChannel(cnum);
+////        }
+////    }
+////
+////    c = &channels[cnum];
+////
+////    // channel is decided to be cnum.
+////    c->sfxinfo = sfxinfo;
+////    c->origin = origin;
+////
+////    return cnum;
+//	return -1;
+//}
 
 //
 // Changes volume and stereo-separation variables
@@ -321,74 +321,74 @@ static int S_GetChannel(mobj_t *origin, sfxinfo_t *sfxinfo)
 // Otherwise, modifies parameters and returns 1.
 //
 
-static int S_AdjustSoundParams(mobj_t *listener, mobj_t *source,
-                               int *vol, int *sep)
-{
-//    fixed_t        approx_dist;
-//    fixed_t        adx;
-//    fixed_t        ady;
-//    angle_t        angle;
-//
-//    // calculate the distance to sound origin
-//    //  and clip it if necessary
-//    adx = abs(listener->x - source->x);
-//    ady = abs(listener->y - source->y);
-//
-//    // From _GG1_ p.428. Appox. eucledian distance fast.
-//    approx_dist = adx + ady - ((adx < ady ? adx : ady)>>1);
-//
-//    if (gamemap != 8 && approx_dist > S_CLIPPING_DIST)
-//    {
-//        return 0;
-//    }
-//
-//    // angle of source to listener
-//    angle = R_PointToAngle2(listener->x,
-//                            listener->y,
-//                            source->x,
-//                            source->y);
-//
-//    if (angle > listener->angle)
-//    {
-//        angle = angle - listener->angle;
-//    }
-//    else
-//    {
-//        angle = angle + (0xffffffff - listener->angle);
-//    }
-//
-//    angle >>= ANGLETOFINESHIFT;
-//
-//    // stereo separation
-//    *sep = 128 - (FixedMul(S_STEREO_SWING, finesine[angle]) >> FRACBITS);
-//
-//    // volume calculation
-//    if (approx_dist < S_CLOSE_DIST)
-//    {
-//        *vol = snd_SfxVolume;
-//    }
-//    else if (gamemap == 8)
-//    {
-//        if (approx_dist > S_CLIPPING_DIST)
-//        {
-//            approx_dist = S_CLIPPING_DIST;
-//        }
-//
-//        *vol = 15+ ((snd_SfxVolume-15)
-//                    *((S_CLIPPING_DIST - approx_dist)>>FRACBITS))
-//            / S_ATTENUATOR;
-//    }
-//    else
-//    {
-//        // distance effect
-//        *vol = (snd_SfxVolume
-//                * ((S_CLIPPING_DIST - approx_dist)>>FRACBITS))
-//            / S_ATTENUATOR;
-//    }
-//
-//    return (*vol > 0);
-	return 0;
-}
+//static int S_AdjustSoundParams(mobj_t *listener, mobj_t *source,
+//                               int *vol, int *sep)
+//{
+////    fixed_t        approx_dist;
+////    fixed_t        adx;
+////    fixed_t        ady;
+////    angle_t        angle;
+////
+////    // calculate the distance to sound origin
+////    //  and clip it if necessary
+////    adx = abs(listener->x - source->x);
+////    ady = abs(listener->y - source->y);
+////
+////    // From _GG1_ p.428. Appox. eucledian distance fast.
+////    approx_dist = adx + ady - ((adx < ady ? adx : ady)>>1);
+////
+////    if (gamemap != 8 && approx_dist > S_CLIPPING_DIST)
+////    {
+////        return 0;
+////    }
+////
+////    // angle of source to listener
+////    angle = R_PointToAngle2(listener->x,
+////                            listener->y,
+////                            source->x,
+////                            source->y);
+////
+////    if (angle > listener->angle)
+////    {
+////        angle = angle - listener->angle;
+////    }
+////    else
+////    {
+////        angle = angle + (0xffffffff - listener->angle);
+////    }
+////
+////    angle >>= ANGLETOFINESHIFT;
+////
+////    // stereo separation
+////    *sep = 128 - (FixedMul(S_STEREO_SWING, finesine[angle]) >> FRACBITS);
+////
+////    // volume calculation
+////    if (approx_dist < S_CLOSE_DIST)
+////    {
+////        *vol = snd_SfxVolume;
+////    }
+////    else if (gamemap == 8)
+////    {
+////        if (approx_dist > S_CLIPPING_DIST)
+////        {
+////            approx_dist = S_CLIPPING_DIST;
+////        }
+////
+////        *vol = 15+ ((snd_SfxVolume-15)
+////                    *((S_CLIPPING_DIST - approx_dist)>>FRACBITS))
+////            / S_ATTENUATOR;
+////    }
+////    else
+////    {
+////        // distance effect
+////        *vol = (snd_SfxVolume
+////                * ((S_CLIPPING_DIST - approx_dist)>>FRACBITS))
+////            / S_ATTENUATOR;
+////    }
+////
+////    return (*vol > 0);
+//	return 0;
+//}
 
 void S_StartSound(void *origin_p, int sfx_id)
 {

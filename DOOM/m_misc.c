@@ -60,7 +60,8 @@ void M_MakeDirectory(char *path)
 #ifdef _WIN32
     mkdir(path);
 #else
-    f_mkdir(path);
+    FRESULT result = f_mkdir(path);
+    (void) result;
 #endif
 }
 
@@ -104,9 +105,9 @@ boolean M_WriteFile(char *name, void *source, int length)
 {
     FIL handle;
     FRESULT result;
-    UINT bytes_written;
+    UINT bytes_written = 0;
 	
-    result = f_open(&handle, name, FA_READ);
+    result = f_open(&handle, name, FA_WRITE | FA_OPEN_ALWAYS);
 
     if (result != FR_OK)
 	return false;

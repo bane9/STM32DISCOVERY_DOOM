@@ -36,7 +36,7 @@
 #define SAVEGAME_EOF 0x1d
 #define VERSIONSIZE 16 
 
-FILE *save_stream;
+FIL save_stream;
 int savegamelength;
 boolean savegame_error;
 
@@ -63,6 +63,7 @@ char *P_SaveGameFile(int slot)
     static char *filename = NULL;
     static size_t filename_size = 0;
     char basename[32];
+    char slot_str[9];
 
     if (filename == NULL)
     {
@@ -70,8 +71,18 @@ char *P_SaveGameFile(int slot)
         filename = malloc(filename_size);
     }
 
-    DEH_snprintf(basename, 32, SAVEGAMENAME "%d.dsg", slot);
-    M_snprintf(filename, filename_size, "%s%s", savegamedir, basename);
+    filename[0] = '\0';
+    basename[0] = '\0';
+    slot_str[0] = '\0';
+
+    itoa(slot, slot_str, 10);
+
+    strcat(basename, SAVEGAMENAME);
+    strcat(basename, slot_str);
+    strcat(basename, ".dsg");
+
+    strcat(filename, savegamedir);
+    strcat(filename, basename);
 
     return filename;
 }
@@ -81,8 +92,12 @@ char *P_SaveGameFile(int slot)
 static byte saveg_read8(void)
 {
     byte result;
+    UINT read_bytes = 0;
 
-    if (fread(&result, 1, 1, save_stream) < 1)
+    f_read(&save_stream, &result, 1, &read_bytes);
+
+
+    if (read_bytes < 1)
     {
         if (!savegame_error)
         {
@@ -98,7 +113,10 @@ static byte saveg_read8(void)
 
 static void saveg_write8(byte value)
 {
-    if (fwrite(&value, 1, 1, save_stream) < 1)
+	UINT written_bytes = 0;
+	f_write(&save_stream, &value, 1, &written_bytes);
+
+    if (written_bytes < 1)
     {
         if (!savegame_error)
         {
@@ -153,7 +171,7 @@ static void saveg_read_pad(void)
     int padding;
     int i;
 
-    pos = ftell(save_stream);
+    pos = f_tell(&save_stream);
 
     padding = (4 - (pos & 3)) & 3;
 
@@ -169,7 +187,7 @@ static void saveg_write_pad(void)
     int padding;
     int i;
 
-    pos = ftell(save_stream);
+    pos = f_tell(&save_stream);
 
     padding = (4 - (pos & 3)) & 3;
 

@@ -115,6 +115,11 @@ static inline void set_state(virtual_joystick_key key, virtual_joystick_event_ty
 
 static inline bool does_fit_constraint(uint16_t x, uint16_t y, const constraint* cstr)
 {
+	if(x == 1) // Workaround for touching the borders of the screen
+	{
+		return false;
+	}
+
 	return (x >= cstr->left && x <= cstr->right) && (y >= cstr->top && y <= cstr->bottom);
 }
 
